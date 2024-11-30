@@ -1,0 +1,50 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="{% static 'main/css/stylesreg.css' %}">
+  <title>Регистрация</title>
+</head>
+<body>
+{% block body %}
+  <div class="container">
+    <div class="logo">
+      <img onclick="window.location.href='{% url 'index_page' %}'" src="{% static 'main/img/logo-mechanic.jpg' %}" alt="Mechanic Logo" class="logo">
+    </div>
+    <h2>Регистрация автомеханика</h2>
+    <form method="post" action="{% url 'register' %}">
+      {% csrf_token %}
+      <label for="email">Электронная почта:</label>
+      <input type="text" id="email" name="email">
+      <label for="phone">Телефон:</label>
+      <input type="text" id="phone" name="phone">
+      <label for="fio">ФИО:</label>
+      <input type="text" id="fio" name="fio">
+      <label for="jobqual">Опыт работы:</label>
+      <input type="text" id="jobqual" name="jobqual">
+      <label for="services">Категория услуг:</label>
+      <input type="text" id="services" name="services">
+      <label for="price">Стоимость услуг:</label>
+      <input type="text" id="price" name="price">
+      <label for="car">Автомобиль:</label>
+      <input type="text" id="car" name="car">
+      <label for="password">Пароль:</label>
+      <input type="password" id="password" name="password">
+      <button type="submit">Зарегистрироваться</button>
+      {% if messages %}
+        {% for message in messages %}
+          <p style="color: red;">{{ message }}</p>
+        {% endfor %}
+      {% endif %}
+    </form>
+    <a href="{% url 'login' %}">У меня есть аккаунт</a>
+  </div>
+
+{% endblock %}
+
+</body>
+</html>
+
